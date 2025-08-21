@@ -9,7 +9,6 @@ import {
   Globe,
   ArrowLeft,
   Send,
-  MoreVertical,
   Wand2,
   Settings,
   PenTool,
@@ -55,29 +54,6 @@ type BotType = "llama-b8" | "llama-b70" | "giminai-flash"
 type Language = "ar" | "en" | "de" | "ch" | "fr" | "ru"
 
 const translations = {
-  ar: {
-    chatTools: "أدوات المحادثة",
-    imageTools: "أدوات الصور",
-    aiContentCreation: "أدوات صناعة المحتوى بالذكاء الاصطناعي",
-    aiTrading: "التداول بالذكاء الاصطناعي",
-    interactiveChat: "الدردشة التفاعلية",
-    advancedTextTools: "أدوات النصوص المتقدمة 🔍",
-    textToImage: "تحويل نص إلى صورة",
-    advancedImageTools: "أدوات صورية متقدمة",
-    textSummary: "ملخص النصوص 📑",
-    sentimentAnalysis: "تحليل المشاعر 🤔",
-    contextualQA: "أسئلة وأجوبة سياقية 📚",
-    creativeWriting: "كتابة إبداعية ✍️",
-    blogIdeas: "اقتراح أفكار للمدونات 💡",
-    socialMedia: "مشاركات لوسائل التواصل 📢",
-    headlines: "مولد العناوين الرئيسية 📰",
-    movieSuggestions: "مقترح أفلام 🎬",
-    tradingAnalyzer: "محلل التداول بالذكاء الاصطناعي",
-    explosiveCoins: "العملات الانفجارية 💥",
-    comingSoon: "سيتم إضافتها قريباً...",
-    enterText: "أدخل النص هنا...",
-    send: "إرسال",
-  },
   en: {
     chatTools: "Chat Tools",
     imageTools: "Image Tools",
@@ -100,6 +76,127 @@ const translations = {
     comingSoon: "Coming Soon...",
     enterText: "Enter text here...",
     send: "Send",
+    // Bot names
+    llamaB8: "Llama B8",
+    llamaB70: "Llama B70",
+    giminaiFlash: "Giminai Flash-2.0",
+
+    // Status messages
+    online: "Online",
+    typing: "Typing...",
+
+    // Placeholders
+    typeMessage: "Type a message...",
+    enterTextToConvert: "Enter the text you want to convert...",
+    generatedImageWillAppear: "Generated image will appear here",
+    enterTradingSymbol: "Enter trading symbol like this: BTC/USDT",
+
+    // Timeframes
+    timeframes: {
+      "5m": "5 minutes",
+      "15m": "15 minutes",
+      "30m": "30 minutes",
+      "1h": "1 hour",
+      "4h": "4 hours",
+      "1d": "1 day",
+      "1w": "1 week",
+    },
+
+    // Movie genres
+    movieGenres: {
+      random: "Random",
+      action: "Action",
+      adventure: "Adventure",
+      animation: "Animation",
+      comedy: "Comedy",
+      crime: "Crime",
+      documentary: "Documentary",
+      drama: "Drama",
+      family: "Family",
+      fantasy: "Fantasy",
+      history: "History",
+      horror: "Horror",
+      music: "Music",
+      mystery: "Mystery",
+      romance: "Romance",
+      sciFi: "Sci-Fi",
+      tvMovie: "TV Movie",
+      thriller: "Thriller",
+      war: "War",
+      western: "Western",
+    },
+  },
+  ar: {
+    chatTools: "أدوات المحادثة",
+    imageTools: "أدوات الصور",
+    aiContentCreation: "أدوات صناعة المحتوى بالذكاء الاصطناعي",
+    aiTrading: "التداول بالذكاء الاصطناعي",
+    interactiveChat: "الدردشة التفاعلية",
+    advancedTextTools: "أدوات النصوص المتقدمة 🔍",
+    textToImage: "تحويل نص إلى صورة",
+    advancedImageTools: "أدوات صورية متقدمة",
+    textSummary: "ملخص النصوص 📑",
+    sentimentAnalysis: "تحليل المشاعر 🤔",
+    contextualQA: "أسئلة وأجوبة سياقية 📚",
+    creativeWriting: "كتابة إبداعية ✍️",
+    blogIdeas: "اقتراح أفكار للمدونات 💡",
+    socialMedia: "مشاركات لوسائل التواصل 📢",
+    headlines: "مولد العناوين الرئيسية 📰",
+    movieSuggestions: "مقترح أفلام 🎬",
+    tradingAnalyzer: "محلل التداول بالذكاء الاصطناعي",
+    explosiveCoins: "العملات الانفجارية 💥",
+    comingSoon: "سيتم إضافتها قريباً...",
+    enterText: "أدخل النص هنا...",
+    send: "إرسال",
+    // Bot names
+    llamaB8: "لاما بي 8",
+    llamaB70: "لاما بي 70",
+    giminaiFlash: "جيميناي فلاش-2.0",
+
+    // Status messages
+    online: "متصل",
+    typing: "جاري الكتابة...",
+
+    // Placeholders
+    typeMessage: "اكتب رسالة...",
+    enterTextToConvert: "أدخل النص الذي تريد تحويله...",
+    generatedImageWillAppear: "ستظهر الصورة المولدة هنا",
+    enterTradingSymbol: "ادخل رمز التداول بهذا الشكل: BTC/USDT",
+
+    // Timeframes
+    timeframes: {
+      "5m": "5 دقائق",
+      "15m": "15 دقيقة",
+      "30m": "30 دقيقة",
+      "1h": "ساعة",
+      "4h": "4 ساعات",
+      "1d": "يوم",
+      "1w": "أسبوع",
+    },
+
+    // Movie genres
+    movieGenres: {
+      random: "عشوائي",
+      action: "أكشن",
+      adventure: "مغامرة",
+      animation: "رسوم متحركة",
+      comedy: "كوميديا",
+      crime: "جريمة",
+      documentary: "وثائقي",
+      drama: "دراما",
+      family: "عائلي",
+      fantasy: "خيال",
+      history: "تاريخ",
+      horror: "رعب",
+      music: "موسيقى",
+      mystery: "غموض",
+      romance: "رومانسية",
+      sciFi: "خيال علمي",
+      tvMovie: "فيلم تلفزيوني",
+      thriller: "إثارة",
+      war: "حرب",
+      western: "ويسترن",
+    },
   },
   de: {
     chatTools: "Chat-Tools",
@@ -123,6 +220,55 @@ const translations = {
     comingSoon: "Demnächst verfügbar...",
     enterText: "Text hier eingeben...",
     send: "Senden",
+    // Bot names
+    llamaB8: "Llama B8",
+    llamaB70: "Llama B70",
+    giminaiFlash: "Giminai Flash-2.0",
+
+    // Status messages
+    online: "Online",
+    typing: "Schreibt...",
+
+    // Placeholders
+    typeMessage: "Nachricht eingeben...",
+    enterTextToConvert: "Geben Sie den Text ein, den Sie konvertieren möchten...",
+    generatedImageWillAppear: "Generiertes Bild wird hier erscheinen",
+    enterTradingSymbol: "Trading-Symbol eingeben wie: BTC/USDT",
+
+    // Timeframes
+    timeframes: {
+      "5m": "5 Minuten",
+      "15m": "15 Minuten",
+      "30m": "30 Minuten",
+      "1h": "1 Stunde",
+      "4h": "4 Stunden",
+      "1d": "1 Tag",
+      "1w": "1 Woche",
+    },
+
+    // Movie genres
+    movieGenres: {
+      random: "Zufällig",
+      action: "Action",
+      adventure: "Abenteuer",
+      animation: "Animation",
+      comedy: "Komödie",
+      crime: "Krimi",
+      documentary: "Dokumentation",
+      drama: "Drama",
+      family: "Familie",
+      fantasy: "Fantasy",
+      history: "Geschichte",
+      horror: "Horror",
+      music: "Musik",
+      mystery: "Mystery",
+      romance: "Romantik",
+      sciFi: "Sci-Fi",
+      tvMovie: "TV-Film",
+      thriller: "Thriller",
+      war: "Krieg",
+      western: "Western",
+    },
   },
   ch: {
     chatTools: "聊天工具",
@@ -146,6 +292,55 @@ const translations = {
     comingSoon: "即将推出...",
     enterText: "在此输入文本...",
     send: "发送",
+    // Bot names
+    llamaB8: "美洲驼 B8",
+    llamaB70: "美洲驼 B70",
+    giminaiFlash: "双子闪光-2.0",
+
+    // Status messages
+    online: "在线",
+    typing: "正在输入...",
+
+    // Placeholders
+    typeMessage: "输入消息...",
+    enterTextToConvert: "输入您要转换的文本...",
+    generatedImageWillAppear: "生成的图像将在此处显示",
+    enterTradingSymbol: "输入交易符号，如：BTC/USDT",
+
+    // Timeframes
+    timeframes: {
+      "5m": "5分钟",
+      "15m": "15分钟",
+      "30m": "30分钟",
+      "1h": "1小时",
+      "4h": "4小时",
+      "1d": "1天",
+      "1w": "1周",
+    },
+
+    // Movie genres
+    movieGenres: {
+      random: "随机",
+      action: "动作",
+      adventure: "冒险",
+      animation: "动画",
+      comedy: "喜剧",
+      crime: "犯罪",
+      documentary: "纪录片",
+      drama: "剧情",
+      family: "家庭",
+      fantasy: "奇幻",
+      history: "历史",
+      horror: "恐怖",
+      music: "音乐",
+      mystery: "悬疑",
+      romance: "爱情",
+      sciFi: "科幻",
+      tvMovie: "电视电影",
+      thriller: "惊悚",
+      war: "战争",
+      western: "西部",
+    },
   },
   fr: {
     chatTools: "Outils de Chat",
@@ -169,6 +364,55 @@ const translations = {
     comingSoon: "Bientôt disponible...",
     enterText: "Entrez le texte ici...",
     send: "Envoyer",
+    // Bot names
+    llamaB8: "Llama B8",
+    llamaB70: "Llama B70",
+    giminaiFlash: "Giminai Flash-2.0",
+
+    // Status messages
+    online: "En ligne",
+    typing: "En train d'écrire...",
+
+    // Placeholders
+    typeMessage: "Tapez un message...",
+    enterTextToConvert: "Entrez le texte que vous voulez convertir...",
+    generatedImageWillAppear: "L'image générée apparaîtra ici",
+    enterTradingSymbol: "Entrez le symbole de trading comme : BTC/USDT",
+
+    // Timeframes
+    timeframes: {
+      "5m": "5 minutes",
+      "15m": "15 minutes",
+      "30m": "30 minutes",
+      "1h": "1 heure",
+      "4h": "4 heures",
+      "1d": "1 jour",
+      "1w": "1 semaine",
+    },
+
+    // Movie genres
+    movieGenres: {
+      random: "Aléatoire",
+      action: "Action",
+      adventure: "Aventure",
+      animation: "Animation",
+      comedy: "Comédie",
+      crime: "Crime",
+      documentary: "Documentaire",
+      drama: "Drame",
+      family: "Familial",
+      fantasy: "Fantastique",
+      history: "Histoire",
+      horror: "Horreur",
+      music: "Musique",
+      mystery: "Mystère",
+      romance: "Romance",
+      sciFi: "Science-fiction",
+      tvMovie: "Téléfilm",
+      thriller: "Thriller",
+      war: "Guerre",
+      western: "Western",
+    },
   },
   ru: {
     chatTools: "Инструменты Чата",
@@ -192,6 +436,55 @@ const translations = {
     comingSoon: "Скоро будет доступно...",
     enterText: "Введите текст здесь...",
     send: "Отправить",
+    // Bot names
+    llamaB8: "Лама Б8",
+    llamaB70: "Лама Б70",
+    giminaiFlash: "Джиминай Флэш-2.0",
+
+    // Status messages
+    online: "В сети",
+    typing: "Печатает...",
+
+    // Placeholders
+    typeMessage: "Введите сообщение...",
+    enterTextToConvert: "Введите текст, который хотите преобразовать...",
+    generatedImageWillAppear: "Сгенерированное изображение появится здесь",
+    enterTradingSymbol: "Введите торговый символ как: BTC/USDT",
+
+    // Timeframes
+    timeframes: {
+      "5m": "5 минут",
+      "15m": "15 минут",
+      "30m": "30 минут",
+      "1h": "1 час",
+      "4h": "4 часа",
+      "1d": "1 день",
+      "1w": "1 неделя",
+    },
+
+    // Movie genres
+    movieGenres: {
+      random: "Случайный",
+      action: "Боевик",
+      adventure: "Приключения",
+      animation: "Анимация",
+      comedy: "Комедия",
+      crime: "Криминал",
+      documentary: "Документальный",
+      drama: "Драма",
+      family: "Семейный",
+      fantasy: "Фэнтези",
+      history: "Исторический",
+      horror: "Ужасы",
+      music: "Музыкальный",
+      mystery: "Мистика",
+      romance: "Романтика",
+      sciFi: "Научная фантастика",
+      tvMovie: "Телефильм",
+      thriller: "Триллер",
+      war: "Военный",
+      western: "Вестерн",
+    },
   },
 }
 
@@ -226,53 +519,53 @@ export default function TelegramMiniApp() {
 
   const botConfigs = {
     "llama-b8": {
-      name: "Llama B8",
+      name: translations[currentLanguage].llamaB8,
       avatar: "/robot-avatar.png",
       color: "purple",
     },
     "llama-b70": {
-      name: "Llama B70",
+      name: translations[currentLanguage].llamaB70,
       avatar: "/robot-llama-b70.png",
       color: "blue",
     },
     "giminai-flash": {
-      name: "Giminai Flash-2.0",
+      name: translations[currentLanguage].giminaiFlash,
       avatar: "/robot-giminai.png",
       color: "red",
     },
   }
 
   const timeframes = [
-    { label: "5 دقائق", value: "5m" },
-    { label: "15 دقيقة", value: "15m" },
-    { label: "30 دقيقة", value: "30m" },
-    { label: "ساعة", value: "1h" },
-    { label: "4 ساعات", value: "4h" },
-    { label: "يوم", value: "1d" },
-    { label: "أسبوع", value: "1w" },
+    { label: "5m", value: "5m" },
+    { label: "15m", value: "15m" },
+    { label: "30m", value: "30m" },
+    { label: "1h", value: "1h" },
+    { label: "4h", value: "4h" },
+    { label: "1d", value: "1d" },
+    { label: "1w", value: "1w" },
   ]
 
   const movieGenres = [
-    { name: "عشوائي", emoji: "🎲" },
-    { name: "أكشن", emoji: "💥" },
-    { name: "مغامرة", emoji: "🗺️" },
-    { name: "رسوم متحركة", emoji: "🎨" },
-    { name: "كوميديا", emoji: "😂" },
-    { name: "جريمة", emoji: "🕵️‍♂️" },
-    { name: "وثائقي", emoji: "📄" },
-    { name: "دراما", emoji: "🎭" },
-    { name: "عائلي", emoji: "👨‍👩‍👧‍👦" },
-    { name: "خيال", emoji: "✨" },
-    { name: "تاريخ", emoji: "📜" },
-    { name: "رعب", emoji: "👻" },
-    { name: "موسيقى", emoji: "🎵" },
-    { name: "غموض", emoji: "❓" },
-    { name: "رومانسية", emoji: "❤️" },
-    { name: "خيال علمي", emoji: "🚀" },
-    { name: "فيلم تلفزيوني", emoji: "📺" },
-    { name: "إثارة", emoji: "⚡" },
-    { name: "حرب", emoji: "🪖" },
-    { name: "ويسترن", emoji: "🤠" },
+    { key: "random", emoji: "🎲" },
+    { key: "action", emoji: "💥" },
+    { key: "adventure", emoji: "🗺️" },
+    { key: "animation", emoji: "🎨" },
+    { key: "comedy", emoji: "😂" },
+    { key: "crime", emoji: "🕵️‍♂️" },
+    { key: "documentary", emoji: "📄" },
+    { key: "drama", emoji: "🎭" },
+    { key: "family", emoji: "👨‍👩‍👧‍👦" },
+    { key: "fantasy", emoji: "✨" },
+    { key: "history", emoji: "📜" },
+    { key: "horror", emoji: "👻" },
+    { key: "music", emoji: "🎵" },
+    { key: "mystery", emoji: "❓" },
+    { key: "romance", emoji: "❤️" },
+    { key: "sciFi", emoji: "🚀" },
+    { key: "tvMovie", emoji: "📺" },
+    { key: "thriller", emoji: "⚡" },
+    { key: "war", emoji: "🪖" },
+    { key: "western", emoji: "🤠" },
   ]
 
   useEffect(() => {
@@ -491,90 +784,74 @@ export default function TelegramMiniApp() {
   )
 
   const renderChatInterface = () => {
-    const currentBot = botConfigs[selectedBot]
+    const config = botConfigs[selectedBot]
 
     return (
-      <div className="flex-1 flex flex-col">
-        {/* Chat Header */}
-        <div className="bg-slate-800/90 backdrop-blur-md border-b border-slate-700/50 px-4 py-3 flex items-center space-x-3">
-          <button
-            onClick={() => setCurrentScreen("llama-chat")}
-            className="w-8 h-8 bg-slate-700/50 rounded-full flex items-center justify-center"
-          >
-            <ArrowLeft className="w-4 h-4 text-white" />
+      <div className="min-h-screen bg-slate-900 flex flex-col">
+        {/* Header */}
+        <div className="bg-slate-800 p-4 flex items-center gap-3 border-b border-slate-700">
+          <button onClick={() => setCurrentScreen("llama-chat")} className="text-white hover:text-gray-300">
+            <ArrowLeft className="w-6 h-6" />
           </button>
-          <div className="w-10 h-10 rounded-full overflow-hidden bg-slate-600">
-            <Image
-              src={currentBot.avatar || "/placeholder.svg"}
-              alt={currentBot.name}
-              width={40}
-              height={40}
-              className="w-full h-full object-cover"
-            />
+          <img src={config.avatar || "/placeholder.svg"} alt={config.name} className="w-10 h-10 rounded-full" />
+          <div>
+            <h2 className="text-xl font-semibold text-white">{config.name}</h2>
+            <p className="text-sm text-green-400">{translations[currentLanguage].online}</p>
           </div>
-          <div className="flex-1">
-            <h3 className="text-white font-semibold">{currentBot.name}</h3>
-            <p className="text-green-400 text-xs">متصل</p>
-          </div>
-          <button className="w-8 h-8 bg-slate-700/50 rounded-full flex items-center justify-center">
-            <MoreVertical className="w-4 h-4 text-white" />
-          </button>
         </div>
 
         {/* Messages */}
-        <div className="flex-1 px-4 py-4 space-y-4 overflow-y-auto">
-          {messages.map((message) => (
-            <div key={message.id} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
+        <div className="flex-1 p-4 space-y-4 overflow-y-auto">
+          {messages.map((message, index) => (
+            <div key={index} className={`flex ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
               <div
-                className={`max-w-xs px-4 py-2 rounded-2xl ${
-                  message.sender === "user"
-                    ? "bg-cyan-600 text-white rounded-br-md"
-                    : "bg-slate-700 text-white rounded-bl-md"
+                className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                  message.sender === "user" ? "bg-blue-600 text-white" : "bg-slate-700 text-white"
                 }`}
               >
-                <p className="text-sm">{message.text}</p>
-                <p className="text-xs opacity-70 mt-1">{message.timestamp}</p>
+                {message.text}
               </div>
             </div>
           ))}
 
-          {/* Typing indicator */}
           {isTyping && (
             <div className="flex justify-start">
-              <div className="bg-slate-700 text-white px-4 py-2 rounded-2xl rounded-bl-md">
-                <div className="flex space-x-1">
-                  <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
-                  <div
-                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "0.1s" }}
-                  ></div>
-                  <div
-                    className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
-                    style={{ animationDelay: "0.2s" }}
-                  ></div>
+              <div className="bg-slate-700 text-white px-4 py-2 rounded-lg">
+                <div className="flex items-center gap-1">
+                  <div className="flex gap-1">
+                    <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.1s" }}
+                    ></div>
+                    <div
+                      className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                      style={{ animationDelay: "0.2s" }}
+                    ></div>
+                  </div>
+                  <span className="text-sm text-gray-400 ml-2">{translations[currentLanguage].typing}</span>
                 </div>
-                <p className="text-xs opacity-70 mt-1">جاري الكتابة...</p>
               </div>
             </div>
           )}
         </div>
 
-        {/* Message Input */}
-        <div className="bg-slate-800/90 backdrop-blur-md border-t border-slate-700/50 px-4 py-3">
-          <div className="flex items-center space-x-2">
+        {/* Input */}
+        <div className="p-4 bg-slate-800 border-t border-slate-700">
+          <div className="flex gap-2">
             <input
               type="text"
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyPress={(e) => e.key === "Enter" && sendMessage()}
-              placeholder="اكتب رسالة..."
-              className="flex-1 bg-slate-700/50 text-white placeholder-gray-400 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+              placeholder={translations[currentLanguage].typeMessage}
+              className="flex-1 bg-slate-700 text-white px-4 py-2 rounded-lg border border-slate-600 focus:outline-none focus:border-blue-500"
             />
             <button
               onClick={sendMessage}
-              className="w-10 h-10 bg-cyan-600 rounded-full flex items-center justify-center hover:bg-cyan-700 transition-colors"
+              className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <Send className="w-5 h-5 text-white" />
+              <Send className="w-5 h-5" />
             </button>
           </div>
         </div>
@@ -680,7 +957,7 @@ export default function TelegramMiniApp() {
               type="text"
               value={textToImageInput}
               onChange={(e) => setTextToImageInput(e.target.value)}
-              placeholder="Enter the text you want to convert..."
+              placeholder={translations[currentLanguage].enterTextToConvert}
               className="w-full bg-slate-700/50 backdrop-blur-sm text-white placeholder-gray-400 rounded-2xl px-6 py-4 focus:outline-none focus:ring-2 focus:ring-pink-500 border border-slate-600/30"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-pink-500/10 to-purple-500/10 rounded-2xl pointer-events-none"></div>
@@ -691,7 +968,7 @@ export default function TelegramMiniApp() {
             <div className="w-full h-64 bg-slate-700/30 backdrop-blur-sm rounded-2xl border border-slate-600/30 flex items-center justify-center">
               <div className="text-center">
                 <Sparkles className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                <p className="text-gray-400">Generated image will appear here</p>
+                <p className="text-gray-400">{translations[currentLanguage].generatedImageWillAppear}</p>
               </div>
             </div>
             <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-pink-500/5 rounded-2xl pointer-events-none"></div>
