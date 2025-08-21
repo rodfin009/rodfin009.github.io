@@ -1,4 +1,4 @@
-# Telegram mini app UI
+# Telegram mini app UIة
 
 *Automatically synced with your [v0.app](https://v0.app) deployments*
 
