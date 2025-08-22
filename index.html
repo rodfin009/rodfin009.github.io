@@ -265,13 +265,13 @@
                 <input 
                     type="text" 
                     class="text-input" 
-                    id="textInput"
+                    id="promptInput"
                     placeholder="Enter the text you want to convert to image..."
                     maxlength="500"
                 >
             </div>
             
-            <button class="generate-button" id="generateButton" onclick="generateImage()">
+            <button class="generate-button" id="generateButton">
                 <div class="loading-spinner" id="loadingSpinner"></div>
                 <span id="buttonText">Generate Image</span>
             </button>
@@ -279,7 +279,7 @@
 
         <!-- Image Display Section -->
         <div class="image-section">
-            <div class="image-container" id="generatedImageContainer">
+            <div class="image-container" id="resultContainer">
                 <div class="placeholder-text" id="placeholderText">
                     Generated image will appear here
                 </div>
@@ -297,134 +297,54 @@
         tg.expand();
         tg.ready();
 
-        const WORKER_API_ENDPOINT = 'https://my-telegram-bot.rodfin0202.workers.dev/api/tool';
+        const WORKER_API_ENDPOINT = "https://my-telegram-bot.rodfin0202.workers.dev/api/tool";
 
-        // DOM Elements - Updated IDs to match user requirements
-        const promptInput = document.getElementById('textInput');
+        const resultContainer = document.getElementById('resultContainer');
+        const promptInput = document.getElementById('promptInput');
         const generateButton = document.getElementById('generateButton');
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const buttonText = document.getElementById('buttonText');
-        const imageContainer = document.getElementById('generatedImageContainer');
-        const placeholderText = document.getElementById('placeholderText');
-        const errorMessage = document.getElementById('errorMessage');
-        const successMessage = document.getElementById('successMessage');
 
-        async function callWorkerTool(toolName, data) {
+        // هذا الكود يربط الزر بوظيفة معالجة الضغط
+        generateButton.addEventListener('click', async () => {
+            const prompt = promptInput.value;
+            if (!prompt) {
+                resultContainer.innerHTML = `<p style="color:red;">الرجاء إدخال نص لإنشاء الصورة.</p>`;
+                return;
+            }
+            
+            // إظهار رسالة "جاري الإنشاء" عند الضغط على الزر
+            resultContainer.innerHTML = `<p>جاري إنشاء الصورة...</p>`;
+
             try {
                 const response = await fetch(WORKER_API_ENDPOINT, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ tool: toolName, data: data })
+                    body: JSON.stringify({
+                        tool: 'stable_diffusion_v1.4',
+                        data: { prompt: prompt }
+                    })
                 });
-                const result = await response.json();
+
+                // إذا كان الاتصال بالـ Worker ناجحاً لكنه أرجع خطأ (مثل 500)
                 if (!response.ok) {
-                    throw new Error(result.error || 'خطأ في الخادم.');
+                    const errorData = await response.json();
+                    throw new Error(errorData.error || 'خطأ غير معروف من الخادم.');
                 }
-                return result;
+
+                const result = await response.json();
+
+                if (result && result.imageUrl) {
+                    // عرض الصورة بعد نجاح الطلب
+                    resultContainer.innerHTML = `<img src="${result.imageUrl}" alt="الصورة التي تم إنشاؤها">`;
+                } else {
+                    // معالجة حالة عدم وجود رابط للصورة في الاستجابة
+                    resultContainer.innerHTML = `<p style="color:red;">لم يتم العثور على رابط للصورة في الاستجابة.</p>`;
+                }
+
             } catch (error) {
-                console.error('Error calling worker tool:', error);
-                return null;
+                // معالجة أخطاء الشبكة أو الأخطاء التي أرجعها الـ Worker
+                resultContainer.innerHTML = `<p style="color:red;">خطأ: ${error.message}</p>`;
             }
-        }
-
-        async function generateImage() {
-            const prompt = document.getElementById('textInput').value;
-            if (!prompt) return;
-
-            // Show loading state
-            setLoadingState(true);
-            hideMessages();
-
-            // إظهار حالة التحميل في حاوية عرض الصورة
-            const container = document.getElementById('generatedImageContainer');
-            container.innerHTML = "<p>جاري إنشاء الصورة...</p>";
-
-            const result = await callWorkerTool('stable_diffusion_v1.4', { prompt: prompt });
-            
-            if (result && result.imageUrl) {
-                // عرض الصورة بعد نجاح الطلب
-                container.innerHTML = `<img src="${result.imageUrl}" alt="الصورة التي تم إنشاؤها" class="generated-image">`;
-                container.classList.add('has-image');
-                showSuccess('Image generated successfully!');
-            } else {
-                // عرض رسالة خطأ
-                container.innerHTML = `<p style="color:red;">فشل إنشاء الصورة. الرجاء المحاولة لاحقاً.</p>`;
-                showError('Failed to generate image. Please try again.');
-            }
-
-            // Hide loading state
-            setLoadingState(false);
-        }
-
-        /**
-         * Display generated image in the container
-         * @param {string} imageUrl - URL of the generated image
-         */
-        function displayImage(imageUrl) {
-            // Clear placeholder text
-            placeholderText.style.display = 'none';
-            
-            // Create image element
-            const img = document.createElement('img');
-            img.src = imageUrl;
-            img.alt = 'Generated image';
-            img.className = 'generated-image';
-            
-            // Handle image load error
-            img.onerror = function() {
-                showError('Failed to load generated image');
-                placeholderText.style.display = 'block';
-            };
-            
-            // Clear container and add image
-            imageContainer.innerHTML = '';
-            imageContainer.appendChild(img);
-            imageContainer.classList.add('has-image');
-        }
-
-        /**
-         * Set loading state for the generate button
-         * @param {boolean} isLoading - Whether to show loading state
-         */
-        function setLoadingState(isLoading) {
-            if (isLoading) {
-                generateButton.disabled = true;
-                loadingSpinner.style.display = 'inline-block';
-                buttonText.textContent = 'Generating...';
-            } else {
-                generateButton.disabled = false;
-                loadingSpinner.style.display = 'none';
-                buttonText.textContent = 'Generate Image';
-            }
-        }
-
-        /**
-         * Show error message
-         * @param {string} message - Error message to display
-         */
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-            successMessage.style.display = 'none';
-        }
-
-        /**
-         * Show success message
-         * @param {string} message - Success message to display
-         */
-        function showSuccess(message) {
-            successMessage.textContent = message;
-            successMessage.style.display = 'block';
-            errorMessage.style.display = 'none';
-        }
-
-        /**
-         * Hide all messages
-         */
-        function hideMessages() {
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-        }
+        });
 
         /**
          * Handle back button click
@@ -439,17 +359,15 @@
             }
         }
 
-        // Event Listeners
-        
         // Allow Enter key to trigger image generation
-        document.getElementById('textInput').addEventListener('keypress', function(event) {
+        promptInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
-                generateImage();
+                generateButton.click();
             }
         });
 
         // Auto-resize input based on content
-        document.getElementById('textInput').addEventListener('input', function() {
+        promptInput.addEventListener('input', function() {
             // Optional: Add character counter or validation here
             if (this.value.length > 500) {
                 this.value = this.value.substring(0, 500);
@@ -458,7 +376,7 @@
 
         // Telegram Web App event handlers
         tg.onEvent('mainButtonClicked', function() {
-            generateImage();
+            generateButton.click();
         });
 
         // Set up main button (optional - for Telegram integration)
