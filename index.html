@@ -297,54 +297,51 @@
         tg.expand();
         tg.ready();
 
+        // **ملاحظة هامة:** استبدل هذا الرابط برابط الـ Worker الخاص بك
         const WORKER_API_ENDPOINT = "https://my-telegram-bot.rodfin0202.workers.dev/api/tool";
 
         const resultContainer = document.getElementById('resultContainer');
         const promptInput = document.getElementById('promptInput');
         const generateButton = document.getElementById('generateButton');
 
-        // هذا الكود يربط الزر بوظيفة معالجة الضغط
-        generateButton.addEventListener('click', async () => {
-            const prompt = promptInput.value;
-            if (!prompt) {
-                resultContainer.innerHTML = `<p style="color:red;">الرجاء إدخال نص لإنشاء الصورة.</p>`;
-                return;
-            }
-            
-            // إظهار رسالة "جاري الإنشاء" عند الضغط على الزر
-            resultContainer.innerHTML = `<p>جاري إنشاء الصورة...</p>`;
-
-            try {
-                const response = await fetch(WORKER_API_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        tool: 'stable_diffusion_v1.4',
-                        data: { prompt: prompt }
-                    })
-                });
-
-                // إذا كان الاتصال بالـ Worker ناجحاً لكنه أرجع خطأ (مثل 500)
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    throw new Error(errorData.error || 'خطأ غير معروف من الخادم.');
+        // هذا الكود يربط زر "Generate Image" بوظيفة الإرسال
+        if (generateButton && promptInput) {
+            generateButton.addEventListener('click', async () => {
+                const prompt = promptInput.value;
+                if (!prompt) {
+                    resultContainer.innerHTML = `<p style="color:red;">الرجاء إدخال نص لإنشاء الصورة.</p>`;
+                    return;
                 }
 
-                const result = await response.json();
+                resultContainer.innerHTML = `<p>جاري إنشاء الصورة...</p>`;
+                
+                try {
+                    const response = await fetch(WORKER_API_ENDPOINT, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            tool: 'stable_diffusion_v1.4',
+                            data: { prompt: prompt }
+                        })
+                    });
 
-                if (result && result.imageUrl) {
-                    // عرض الصورة بعد نجاح الطلب
-                    resultContainer.innerHTML = `<img src="${result.imageUrl}" alt="الصورة التي تم إنشاؤها">`;
-                } else {
-                    // معالجة حالة عدم وجود رابط للصورة في الاستجابة
-                    resultContainer.innerHTML = `<p style="color:red;">لم يتم العثور على رابط للصورة في الاستجابة.</p>`;
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error || 'خطأ غير معروف من الخادم.');
+                    }
+
+                    const result = await response.json();
+                    
+                    if (result && result.imageUrl) {
+                        resultContainer.innerHTML = `<img src="${result.imageUrl}" alt="الصورة التي تم إنشاؤها">`;
+                    } else {
+                        resultContainer.innerHTML = `<p style="color:red;">لم يتم العثور على رابط للصورة في الاستجابة.</p>`;
+                    }
+                } catch (error) {
+                    resultContainer.innerHTML = `<p style="color:red;">خطأ: ${error.message}</p>`;
                 }
-
-            } catch (error) {
-                // معالجة أخطاء الشبكة أو الأخطاء التي أرجعها الـ Worker
-                resultContainer.innerHTML = `<p style="color:red;">خطأ: ${error.message}</p>`;
-            }
-        });
+            });
+        }
 
         /**
          * Handle back button click
@@ -358,30 +355,6 @@
                 window.history.back();
             }
         }
-
-        // Allow Enter key to trigger image generation
-        promptInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                generateButton.click();
-            }
-        });
-
-        // Auto-resize input based on content
-        promptInput.addEventListener('input', function() {
-            // Optional: Add character counter or validation here
-            if (this.value.length > 500) {
-                this.value = this.value.substring(0, 500);
-            }
-        });
-
-        // Telegram Web App event handlers
-        tg.onEvent('mainButtonClicked', function() {
-            generateButton.click();
-        });
-
-        // Set up main button (optional - for Telegram integration)
-        tg.MainButton.text = 'Generate Image';
-        tg.MainButton.show();
 
         console.log('Stable Diffusion 1.4 Mini App initialized');
     </script>
