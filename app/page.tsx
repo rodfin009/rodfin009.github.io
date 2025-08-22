@@ -1402,7 +1402,9 @@ export default function TelegramMiniApp() {
                 className="bg-slate-700/50 hover:bg-slate-600/50 rounded-lg p-3 border border-slate-600/30 transition-all hover:scale-105 flex flex-col items-center justify-center min-h-[60px]"
               >
                 <span className="text-lg mb-1">{genre.emoji}</span>
-                <span className="text-xs text-white text-center leading-tight">{genre.name}</span>
+                <span className="text-xs text-white text-center leading-tight">
+                  {translations[currentLanguage].movieGenres[genre.key]}
+                </span>
               </button>
             ))}
           </div>
